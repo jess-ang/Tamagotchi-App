@@ -29,21 +29,21 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginBottom="30dp"
-                android:src="@drawable/pet" />
+                android:src="@drawable/dog" />
             <ImageView
                 android:id="@+id/toy2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_below="@id/toy1"
                 android:layout_marginBottom="30dp"
-                android:src="@drawable/pet" />
+                android:src="@drawable/dog" />
 
             <ImageView
                 android:id="@+id/toy3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_below="@id/toy2"
-                android:src="@drawable/pet" />
+                android:src="@drawable/dog" />
 
             <RadioGroup
                 android:layout_width="wrap_content"

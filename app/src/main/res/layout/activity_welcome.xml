@@ -37,21 +37,21 @@
             android:columnCount="3">
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/pet1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:layout_weight="2"
-                android:src="@drawable/pet" />
+                android:src="@drawable/dog" />
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/pet2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:layout_weight="2"
                 android:src="@drawable/kitty" />
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/pet3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
