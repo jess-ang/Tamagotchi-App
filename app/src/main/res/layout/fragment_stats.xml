@@ -1,0 +1,70 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".StatsFragment" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/stats_tab"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <ListView
+        android:id="@+id/list_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/stats" />
+
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:columnCount="3">
+
+        <Button
+            android:id="@+id/toys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/toys" />
+        <Button
+            android:id="@+id/food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/food" />
+
+        <Button
+            android:id="@+id/sleep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sleep" />
+        <Button
+            android:id="@+id/heal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/heal" />
+        <Button
+            android:id="@+id/bath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bath" />
+        <Button
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/photo" />
+
+    </GridLayout>
+
+
+
+</LinearLayout>

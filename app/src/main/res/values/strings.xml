@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">TamagotchiApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome!</string>
+    <string name="choosePet">Choose a pet</string>
+    <string name="petName">Enter your pet\'s name</string>
+
+    <string name="mypet_tab">My Pet</string>
+
+    <string name="stats_tab">Stats</string>
+    <string-array name="stats">
+        <item>Hunger</item>
+        <item>Mood</item>
+        <item>Health</item>
+        <item>Hygiene</item>
+        <item>Sleep</item>
+    </string-array>
+    <string name="toys">Toys</string>
+    <string name="food">Food</string>
+    <string name="heal">Heal</string>
+    <string name="bath">Bath</string>
+    <string name="sleep">Sleep</string>
+    <string name="photo">Photo</string>
+
+    <string name="profile_tab">Profile</string>
+    <string name="myProfile">My Profile</string>
+    <string name="getName">Enter your name</string>
+    <string name="getEmail">Enter your e-mail</string>
+    <string name="emailMe">Email me about my pet\'s needs</string>
+    <string-array name="toys">
+        <item>Ball</item>
+        <item>Plush</item>
+        <item>Rope</item>
+    </string-array>
+    <string-array name="food">
+        <item>Chicken</item>
+        <item>Fish</item>
+        <item>Carrot</item>
+    </string-array>
 </resources>
