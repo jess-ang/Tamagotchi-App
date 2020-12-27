@@ -10,42 +10,41 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center_horizontal"
-        android:text="@string/myProfile"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/myProfile"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:hint="@string/getName" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"/>
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/getEmail" />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
 
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/emailMe" />
-    <!--    android:onClick="onCheckboxClicked"/>-->
+        <CheckBox
+            android:id="@+id/sendAlerts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/emailMe" />
+        <!--    android:onClick="onCheckboxClicked"/>-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OK" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"/>
+<!--            android:onClick="onClickUser"/>-->
 
     </LinearLayout>
 </ScrollView>

@@ -8,18 +8,16 @@
     tools:context=".MyPetFragment" >
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/petNameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:gravity="center_horizontal"
-        android:text="Petname"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/petImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

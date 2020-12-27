@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyPetFragment" >
+    tools:context=".WelcomeActivity" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,27 +41,23 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
-                android:layout_weight="2"
                 android:src="@drawable/dog" />
             <ImageView
                 android:id="@+id/pet2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
-                android:layout_weight="2"
                 android:src="@drawable/kitty" />
             <ImageView
                 android:id="@+id/pet3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
-                android:layout_weight="2"
                 android:src="@drawable/bunny" />
-
-
 
         </GridLayout>
         <RadioGroup
+            android:id="@+id/petSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -70,7 +66,7 @@
 
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/dog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
@@ -78,7 +74,7 @@
                 android:text="Dog" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
@@ -86,7 +82,7 @@
                 android:text="Cat" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/bunny"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
@@ -94,6 +90,7 @@
                 android:text="Bunny" />
         </RadioGroup>
         <EditText
+            android:id="@+id/setPetName"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -106,9 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="OK" />
-
-
+            android:text="OK"
+            android:onClick="onClickChoosePet"/>
 
     </LinearLayout>
 </ScrollView>

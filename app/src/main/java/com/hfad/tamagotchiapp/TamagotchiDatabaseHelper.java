@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class TamagotchiDatabaseHelper extends SQLiteOpenHelper {
+class TamagotchiDatabaseHelper extends SQLiteOpenHelper{
     private static final String DB_NAME = "tamagotchi"; // the name of our database
     private static final int DB_VERSION = 1; // the version of the database
+
     TamagotchiDatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db){
         updateMyDatabase(db, 0, DB_VERSION);
@@ -25,14 +27,7 @@ public class TamagotchiDatabaseHelper extends SQLiteOpenHelper {
         petValues.put("IMAGE_RESOURCE_ID", resourceId);
         db.insert("PET",null,petValues);
     }
-    private static void insertUser(SQLiteDatabase db, String name, String email, int petId, String petName ){
-        ContentValues userValues = new ContentValues();
-        userValues.put("NAME", name);
-        userValues.put("EMAIL", email);
-        userValues.put("PET_ID", petId);
-        userValues.put("PET_NAME", petName);
-        db.insert("PET",null,userValues);
-    }
+
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
             db.execSQL("CREATE TABLE PET (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -42,7 +37,7 @@ public class TamagotchiDatabaseHelper extends SQLiteOpenHelper {
                     + "NAME TEXT, "
                     + "EMAIL TEXT, "
                     + "ALERT NUMERIC, "
-                    + "PET_ID INTEGER,"
+                    + "PET_SELECTED TEXT,"
                     + "PET_NAME TEXT);");
 
             insertPet(db,"Dog",R.drawable.dog);
