@@ -38,4 +38,7 @@
         <item>Fish</item>
         <item>Carrot</item>
     </string-array>
+
+    <string name="question">What is the secret of comedy?</string>
+    <string name="response">Timing!</string>
 </resources>

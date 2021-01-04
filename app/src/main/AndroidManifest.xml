@@ -9,21 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestActivity">
+        <service
+            android:name=".NeedService"
+            android:enabled="true"
+            android:exported="false"></service>
+        <service
+            android:name=".NeedsService"
+            android:exported="false" />
 
-        </activity>
-        <activity android:name=".CreateProfile"></activity>
-        <activity android:name=".ToysActivity"></activity>
-        <activity android:name=".WelcomeActivity">
-
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".PruebaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NeedsActivity"></activity>
+        <activity android:name=".TimeActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".CreateProfile" />
+        <activity android:name=".ToysActivity" />
+        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".MainActivity" />
+
+        <service
+            android:name=".NeedsService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

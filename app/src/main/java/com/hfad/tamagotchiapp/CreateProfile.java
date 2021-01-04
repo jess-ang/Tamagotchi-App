@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -19,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreateProfile extends AppCompatActivity {
-    private SQLiteDatabase db;
     private String petName;
     private String petSelected;
 
@@ -38,27 +38,31 @@ public class CreateProfile extends AppCompatActivity {
         //Obtener el nombre del usuario
         EditText nameView = (EditText) findViewById(R.id.setName);
         EditText emailView = (EditText) findViewById(R.id.setEmail);
+        CheckBox sendAlerts = (CheckBox) findViewById(R.id.sendAlerts);
+
         String name = nameView.getText().toString();
         String email = emailView.getText().toString();
+
+        ContentValues userValues = new ContentValues();
+        userValues.put("NAME", name);
+        userValues.put("EMAIL", email);
+        userValues.put("ALERT",sendAlerts.isChecked());
+        userValues.put("PET_SELECTED", petSelected);
+        userValues.put("PET_NAME", petName);
 
         SQLiteOpenHelper tamagotchiDatabaseHelper = new TamagotchiDatabaseHelper(this);
 
         try{
-            db = tamagotchiDatabaseHelper.getReadableDatabase();
-            ContentValues userValues = new ContentValues();
-            userValues.put("NAME", name);
-            userValues.put("EMAIL", email);
-            userValues.put("PET_SELECTED", petSelected);
-            userValues.put("PET_NAME", petName);
+            SQLiteDatabase db = tamagotchiDatabaseHelper.getReadableDatabase();
             db.insert("USER",null,userValues);
-
+            db.close();
         } catch(SQLiteException e) {
             Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
             toast.show();
         }
 
         Intent intent = new Intent(this,
-                TestActivity.class);
+                MainActivity.class);
 
         startActivity(intent);
     }

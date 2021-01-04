@@ -37,14 +37,13 @@
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/emailMe" />
-        <!--    android:onClick="onCheckboxClicked"/>-->
+            android:text="@string/emailMe"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit"/>
-<!--            android:onClick="onClickUser"/>-->
+            android:text="Edit"
+            android:onClick="onClickProfileChange"/>
 
     </LinearLayout>
 </ScrollView>
