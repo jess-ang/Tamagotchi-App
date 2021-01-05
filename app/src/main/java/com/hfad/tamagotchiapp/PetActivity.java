@@ -154,4 +154,9 @@ public class PetActivity extends AppCompatActivity {
             }
         });
     }
+    public void onClickProfileChange(View view){
+        Intent intent = new Intent(this,
+                MyProfileActivity.class);
+        startActivity(intent);
+    }
 }

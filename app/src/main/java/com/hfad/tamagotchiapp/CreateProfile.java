@@ -53,7 +53,8 @@ public class CreateProfile extends AppCompatActivity {
         SQLiteOpenHelper tamagotchiDatabaseHelper = new TamagotchiDatabaseHelper(this);
 
         try{
-            SQLiteDatabase db = tamagotchiDatabaseHelper.getReadableDatabase();
+            SQLiteDatabase db = tamagotchiDatabaseHelper.getWritableDatabase();
+//            SQLiteDatabase db = tamagotchiDatabaseHelper.getReadableDatabase();
             db.insert("USER",null,userValues);
             db.close();
         } catch(SQLiteException e) {
