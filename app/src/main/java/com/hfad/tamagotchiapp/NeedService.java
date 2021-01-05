@@ -18,7 +18,6 @@ public class NeedService extends Service {
     private int counter = 8;
 
     private final IBinder binder = new NeedBinder();
-    private final Random random = new Random();
     public class NeedBinder extends Binder {
         NeedService getNeed() {
             return NeedService.this;
@@ -29,6 +28,7 @@ public class NeedService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.v("Nuevo servicio", needMsg);
         runNeed();
         check();
     }
@@ -49,15 +49,13 @@ public class NeedService extends Service {
             @Override
             public void run() {
                 if(!newNeed){
-                    if(counter>4){
+                    if(counter>9){
                         needMsg = getMsg(messages);
                         newNeed = true;
-                        Log.v("Nuevo servicio", needMsg);
                     }
                 }
-                counter%=5;
+                counter%=10;
                 counter++;
-                Log.v("Segundos", String.valueOf(counter));
                 handler.postDelayed(this, 1000);
             }
         });
@@ -68,7 +66,6 @@ public class NeedService extends Service {
             @Override
             public void run() {
                 if(wasAttended) {
-                    needMsg = "Thank you!";
                     wasAttended = false;
                     newNeed = false;
                     counter = 0;

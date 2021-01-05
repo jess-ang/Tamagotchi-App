@@ -11,91 +11,89 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class NeedsActivity extends AppCompatActivity {
-    final String[] mensajes = {"I'm hungry","I'm bored","I got muddy","I feel sick","I'm sleepy"};
-    private String need = "hola";
+    static final String[] messages = {"I'm hungry","I'm bored","I got muddy","I feel sick","I'm sleepy"};
+    private String needMsg = "hola";
     private boolean newNeed;
-    private boolean wasAttended;
+    private boolean startRunNeed = true;
     private boolean wasRunning;
+    private int counter = 8;
 
-    private int needTime = 15000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_needs);
+
         if (savedInstanceState != null) {
             newNeed = savedInstanceState.getBoolean("newNeed");
-            need = savedInstanceState.getString("need");
-            wasAttended = savedInstanceState.getBoolean("wasAttended");
+            needMsg = savedInstanceState.getString("need");
+            counter = savedInstanceState.getInt("counter");
+            startRunNeed = savedInstanceState.getBoolean("startRunNeed");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
-        else{
+        if (!wasRunning) {
+            runNeed();
             wasRunning = true;
         }
-        if(wasRunning){
-            final TextView timeView = (TextView)findViewById(R.id.needsMsg);
-            timeView.setText(need);
-        }
-
-        check();
-        runTimer();
+        displayMsg();
     }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean("newNeed", newNeed);
-        savedInstanceState.putString("need", need);
-        savedInstanceState.putBoolean("wasAttended",wasAttended);
+        savedInstanceState.putString("need", needMsg);
+        savedInstanceState.putBoolean("startRunNeed",startRunNeed);
         savedInstanceState.putBoolean("wasRunning",wasRunning);
+        savedInstanceState.putInt("counter",counter);
+        Log.v("save",String.valueOf(startRunNeed));
+
     }
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        startRunNeed = false;
 //        final TextView timeView = (TextView)findViewById(R.id.needsMsg);
-//        timeView.setText(need);
-//    }
+//        timeView.setText(needMsg);
+        Log.v("onPause",String.valueOf(startRunNeed));
+
+    }
     @Override
     protected void onResume() {
         super.onResume();
-        final TextView timeView = (TextView)findViewById(R.id.needsMsg);
-        timeView.setText(need);
-    }
-    @Override
-    protected void onStart(){
-        super.onStart();
-        final TextView timeView = (TextView)findViewById(R.id.needsMsg);
-        timeView.setText(need);
+//        startRunNeed = true;
+        Log.v("resume",String.valueOf(startRunNeed));
+
     }
 
     public void onClickFeed(View view) {
-        if(need.equals(mensajes[0])) {
-            wasAttended = true;
-            Log.v("MainActivity","atentido");
+        if(needMsg.equals(messages[0])) {
+            needAttended();
         }
     }
     public void onClickPlay(View view) {
-        if(need.equals(mensajes[1])){
-            wasAttended = true;
-            Log.v("MainActivity","atentido");
-
+        if(needMsg.equals(messages[1])){
+            needAttended();
         }
     }
     public void onClickBath(View view) {
-        if(need.equals(mensajes[2]) ){
-            wasAttended = true;
-            Log.v("MainActivity","atentido");
+        if(needMsg.equals(messages[2]) ){
+            needAttended();
         }
     }
     public void onClickHeal(View view) {
-        if(need.equals(mensajes[3]) ) {
-            wasAttended = true;
-            Log.v("MainActivity","atentido");
+        if(needMsg.equals(messages[3]) ) {
+            needAttended();
         }
     }
     public void onClickSleep(View view) {
-        if(need.equals(mensajes[4])){
-            wasAttended = true;
-            Log.v("MainActivity","atentido");
+        if(needMsg.equals(messages[4])){
+            needAttended();
         }
+    }
+
+    private void needAttended(){
+        newNeed = true;
+        needMsg = "Thanks!";
+        startRunNeed = true;
     }
 
     public String getMsg(String[] mensajes){
@@ -103,35 +101,45 @@ public class NeedsActivity extends AppCompatActivity {
         return mensajes[index];
     }
 
-    private void runTimer() {
-        final TextView timeView = (TextView)findViewById(R.id.needsMsg);
+    private void runNeed() {
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (!newNeed) {
-                    need = getMsg(mensajes);
-                    newNeed = true;
-                    timeView.setText(need);
+                if(startRunNeed){
+                    if(!newNeed){
+                        if(counter>4){
+                            newNeed = true;
+                        }
+                        counter%=5;
+                        counter++;
+                    }
+                    else {
+                        needMsg = getMsg(messages);
+                        counter = 0;
+                    startRunNeed =false;
+                    }
+                    Log.v("start","run");
                 }
-                handler.postDelayed(this, needTime);
+                else
+                {
+                    Log.v("stop","run");
+
+                }
+                handler.postDelayed(this, 1000);
             }
         });
     }
 
-    private void check() {
-        final TextView timeView = (TextView)findViewById(R.id.needsMsg);
+    private void displayMsg() {
+        final TextView mensaje = (TextView)findViewById(R.id.needsMsg);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if(wasAttended) {
-                    need = "gracias!";
-                    timeView.setText(need);
-                    wasAttended = false;
-                    newNeed = false;
-                }
-                handler.postDelayed(this, 1000);
+                mensaje.setText(needMsg);
+//                Log.v("display", needMsg);
+                handler.postDelayed(this, 100);
             }
         });
     }

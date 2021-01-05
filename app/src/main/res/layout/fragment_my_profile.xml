@@ -1,14 +1,17 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MyProfileFragment" >
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".MyProfileFragment" >-->
     <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        tools:context=".MyProfileFragment" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +41,11 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/emailMe"/>
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:onClick="test"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,4 +53,4 @@
             android:onClick="onClickProfileChange"/>
 
     </LinearLayout>
-</ScrollView>
+<!--</ScrollView>-->

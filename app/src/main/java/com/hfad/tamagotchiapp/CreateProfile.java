@@ -62,7 +62,7 @@ public class CreateProfile extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this,
-                MainActivity.class);
+                PetActivity.class);
 
         startActivity(intent);
     }

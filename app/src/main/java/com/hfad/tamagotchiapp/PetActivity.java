@@ -6,20 +6,28 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.Locale;
+public class PetActivity extends AppCompatActivity {
+    private SQLiteDatabase db;
+    private Cursor userCursor;
+    private Cursor petCursor;
+    private String petName;
+    private int petImageId;
 
-public class PruebaActivity extends AppCompatActivity {
     static final String[] mensajes = {"I'm hungry","I'm bored","I got muddy","I feel sick","I'm sleepy"};
-
     private String estado = "hola";
-
+    private boolean isRunning;
     private NeedService need;
     private boolean bound = false;
     private ServiceConnection connection = new ServiceConnection() {
@@ -38,9 +46,39 @@ public class PruebaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prueba);
+        setContentView(R.layout.activity_pet);
+
+        SQLiteOpenHelper tamagotchiDatabaseHelper = new TamagotchiDatabaseHelper(this);
+
+        try {
+            db = tamagotchiDatabaseHelper.getReadableDatabase();
+            userCursor = db.query("USER",
+                    new String[]{"_id", "PET_SELECTED","PET_NAME"},
+                    null, null, null, null, null);
+
+            String pet="";
+            if (userCursor.moveToFirst()) {
+                pet = userCursor.getString(1);
+                petName = userCursor.getString(2);
+            }
+
+            petCursor = db.query("PET",
+                    new String[]{"_id", "IMAGE_RESOURCE_ID"},
+                    "NAME = ?",
+                    new String[] {pet}, null, null, null);
+
+            if (petCursor.moveToFirst()) {
+                petImageId = petCursor.getInt(1);
+            }
+
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
         if (savedInstanceState != null) {
             estado = savedInstanceState.getString("estado");
+            isRunning = savedInstanceState.getBoolean("isRunning");
         }
         displayMsg();
     }
@@ -48,12 +86,19 @@ public class PruebaActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString("estado", estado);
+        savedInstanceState.putBoolean("isRunning", isRunning);
     }
     @Override
     protected void onStart() {
         super.onStart();
         Intent intent = new Intent(this, NeedService.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
+        TextView petNameText = (TextView) findViewById(R.id.petNameTitle);
+        petNameText.setText("My pet: "+petName);
+        ImageView petImage = (ImageView) findViewById(R.id.petImage);
+        petImage.setImageResource(petImageId);
+
     }
     @Override
     protected void onStop() {
@@ -66,32 +111,33 @@ public class PruebaActivity extends AppCompatActivity {
     public void onClickFeed(View view) {
         if(estado.equals(mensajes[0])) {
             need.wasAttended = true;
-            Log.v("MainActivity","atentido");
+            need.needMsg = "Thank you!";
         }
     }
     public void onClickPlay(View view) {
         if(estado.equals(mensajes[1])){
             need.wasAttended = true;
-            Log.v("MainActivity","atentido");
+            need.needMsg = "I'm happy now!";
 
         }
     }
     public void onClickBath(View view) {
         if(estado.equals(mensajes[2]) ){
             need.wasAttended = true;
-            Log.v("MainActivity","atentido");
+            need.needMsg = "I feel clean!";
         }
     }
     public void onClickHeal(View view) {
         if(estado.equals(mensajes[3]) ) {
             need.wasAttended = true;
-            Log.v("MainActivity","atentido");
+            need.needMsg = "I feel better!";
+
         }
     }
     public void onClickSleep(View view) {
         if(estado.equals(mensajes[4])){
             need.wasAttended = true;
-            Log.v("MainActivity","atentido");
+            need.needMsg = "Hi!";
         }
     }
     private void displayMsg() {
@@ -104,7 +150,7 @@ public class PruebaActivity extends AppCompatActivity {
                         estado = need.needMsg;
                 }
                 mensaje.setText(estado);
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(this, 500);
             }
         });
     }
