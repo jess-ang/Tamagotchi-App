@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -39,6 +40,7 @@ public class PetActivity extends AppCompatActivity {
     private String petName;
     private int petImageId;
     private Button saveImage;
+    private String email;
 
     static final String[] mensajes = {"I'm hungry","I'm bored","I got muddy","I feel sick","I'm sleepy"};
     private String estado = "hola";
@@ -83,13 +85,14 @@ public class PetActivity extends AppCompatActivity {
         try {
             db = tamagotchiDatabaseHelper.getReadableDatabase();
             userCursor = db.query("USER",
-                    new String[]{"_id", "PET_SELECTED","PET_NAME"},
+                    new String[]{"_id", "PET_SELECTED","PET_NAME","EMAIL"},
                     null, null, null, null, null);
 
             String pet="";
             if (userCursor.moveToFirst()) {
                 pet = userCursor.getString(1);
                 petName = userCursor.getString(2);
+                email = userCursor.getString(3);
             }
 
             petCursor = db.query("PET",
@@ -136,7 +139,7 @@ public class PetActivity extends AppCompatActivity {
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
         TextView petNameText = (TextView) findViewById(R.id.petNameTitle);
-        petNameText.setText(petName);
+        petNameText.setText(petName+" says:");
         ImageView petImage = (ImageView) findViewById(R.id.petImage);
         petImage.setImageResource(petImageId);
 
@@ -240,7 +243,15 @@ public class PetActivity extends AppCompatActivity {
             Log.v("close", "fail");
         }
     }
-
+    public void sendMail(View view){
+        String[] TO_EMAILS = {email};
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL,TO_EMAILS);
+        intent.putExtra(Intent.EXTRA_SUBJECT,"TamagotchiApp Reminder");
+        intent.putExtra(Intent.EXTRA_TEXT,"Hello. Your pet says: "+need.needMsg);
+        startActivity(Intent.createChooser(intent,"Send reminder via"));
+    }
     //create bitmap from view and returns it
     private Bitmap getPetPhoto() {
 //        LinearLayout savingLayout = (LinearLayout)findViewById(R.id.idForSaving);
