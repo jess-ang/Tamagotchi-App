@@ -1,7 +1,9 @@
 package com.hfad.tamagotchiapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -36,8 +38,7 @@ public class PetActivity extends AppCompatActivity {
     private Cursor petCursor;
     private String petName;
     private int petImageId;
-    private ImageView imageView;
-    private Button btnPhoto;
+    private Button saveImage;
 
     static final String[] mensajes = {"I'm hungry","I'm bored","I got muddy","I feel sick","I'm sleepy"};
     private String estado = "hola";
@@ -63,6 +64,21 @@ public class PetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pet);
 
         SQLiteOpenHelper tamagotchiDatabaseHelper = new TamagotchiDatabaseHelper(this);
+
+        try{
+            db = tamagotchiDatabaseHelper.getReadableDatabase();
+            userCursor = db.query("USER",
+                    new String[] {"_id","PET_SELECTED"},
+                    null, null, null, null, null);
+
+            if (!userCursor.moveToFirst()) {
+                Intent intent = new Intent(this,WelcomeActivity.class);
+                startActivity(intent);
+            }
+        } catch(SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
         try {
             db = tamagotchiDatabaseHelper.getReadableDatabase();
@@ -95,8 +111,17 @@ public class PetActivity extends AppCompatActivity {
             isRunning = savedInstanceState.getBoolean("isRunning");
         }
         displayMsg();
-        imageView = (ImageView) findViewById(R.id.petImage);
-        btnPhoto = (Button) findViewById(R.id.photo);
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        saveImage = (Button)findViewById(R.id.photo);
+        saveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("btn","press");
+//                saveToGallery();
+            }
+        });
     }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -176,18 +201,18 @@ public class PetActivity extends AppCompatActivity {
                 MyProfileActivity.class);
         startActivity(intent);
     }
-    public void onClickSave(View view){
+    private void saveToGallery(){
         ImageView imageView = findViewById(R.id.imageView);
         Bitmap bitmap = getPetPhoto();
         imageView.setImageBitmap(bitmap);
-        saveBitMap(bitmap);
+//        saveBitMap(bitmap);
     }
     private void saveBitMap(Bitmap bitmap){
         FileOutputStream outputStream = null;
         File filepath = Environment.getExternalStorageDirectory();
-        File dir = new File(filepath.getAbsolutePath()+"/Demo/");
-        dir.mkdir();
-        File file = new File(dir,System.currentTimeMillis()+".jpg");
+        File dir = new File(filepath.getAbsolutePath()+"/MyPics/");
+        dir.mkdirs();
+        File file = new File(dir,System.currentTimeMillis()+".png");
         try{
             outputStream = new FileOutputStream(file);
             Log.v("New file", "ok");
@@ -195,7 +220,7 @@ public class PetActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.v("New file", "fail");
         }
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
         Toast toast = Toast.makeText(this,"Image saved!", Toast.LENGTH_SHORT);
         toast.show();
         try{
@@ -205,7 +230,6 @@ public class PetActivity extends AppCompatActivity {
         catch (IOException e) {
             e.printStackTrace();
             Log.v("flush", "fail");
-
         }
         try{
             outputStream.close();
@@ -214,7 +238,6 @@ public class PetActivity extends AppCompatActivity {
         catch (IOException e) {
             e.printStackTrace();
             Log.v("close", "fail");
-
         }
     }
 
@@ -227,7 +250,7 @@ public class PetActivity extends AppCompatActivity {
         if (bgDrawable!=null) {
             bgDrawable.draw(canvas);
         }   else{
-            canvas.drawColor(Color.BLUE);
+            canvas.drawColor(Color.WHITE);
         }
         savingLayout.draw(canvas);
         return bitmap;

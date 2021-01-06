@@ -74,7 +74,11 @@ public class MyProfileActivity extends AppCompatActivity {
             toast.show();
         }
     }
-
+    public void onClickPet(View view){
+        Intent intent = new Intent(this,
+                PetActivity.class);
+        startActivity(intent);
+    }
     public void onClickProfileChange(View view){
         EditText nameView = (EditText) findViewById(R.id.setName);
         EditText emailView = (EditText) findViewById(R.id.setEmail);

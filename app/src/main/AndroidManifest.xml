@@ -12,43 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity4"></activity>
-        <activity android:name=".MainActivity3">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MyProfileActivity" />
-        <activity android:name=".MainActivity2" />
-
         <service
             android:name=".NeedService"
             android:enabled="true"
             android:exported="false" />
-
+        <activity android:name=".MyProfileActivity" />
         <activity android:name=".PetActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
-        <activity android:name=".NeedsActivity" /> <!-- <activity android:name=".TimeActivity" /> -->
-        <!-- <activity android:name=".TestActivity" /> -->
         <activity android:name=".CreateProfile" />
-        <activity android:name=".ToysActivity" />
         <activity android:name=".WelcomeActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

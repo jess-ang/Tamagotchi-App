@@ -9,15 +9,28 @@
     android:padding="16dp"
     android:orientation="vertical"
     android:gravity="center_horizontal">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="My Pet"
+            android:onClick="onClickPet"/>
+
+    </RelativeLayout>
     <TextView
+        android:id="@+id/profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_alignParentStart="true"
         android:text="@string/myProfile"
-        android:textSize="24dp"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
         android:textStyle="bold" />
-
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -30,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="15dp"/>
 
     <CheckBox
         android:id="@+id/sendAlerts"
@@ -43,16 +56,16 @@
         android:onClick="onCheckboxClicked"/>
 
     <TextView
+        android:id="@+id/editProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:text="Edit Profile"
-        android:textSize="24dp"
-        android:textStyle="bold" />
+        android:textSize="24dp" />
 
     <EditText
         android:id="@+id/setName"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:hint="@string/getName" />

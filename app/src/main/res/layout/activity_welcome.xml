@@ -33,25 +33,24 @@
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:columnCount="3">
 
             <ImageView
                 android:id="@+id/pet1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:src="@drawable/dog" />
             <ImageView
                 android:id="@+id/pet2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:src="@drawable/kitty" />
             <ImageView
                 android:id="@+id/pet3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:src="@drawable/bunny" />
 
@@ -70,7 +69,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="32dp"
                 android:text="Dog" />
 
             <RadioButton
@@ -78,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="32dp"
+                android:layout_marginHorizontal="40dp"
                 android:text="Cat" />
 
             <RadioButton
@@ -86,7 +84,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="32dp"
                 android:text="Bunny" />
         </RadioGroup>
         <EditText

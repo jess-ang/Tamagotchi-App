@@ -35,10 +35,9 @@ public class MainActivity3 extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main3);
 
-            saveImage = (Button)findViewById(R.id.photo);
-
             ActivityCompat.requestPermissions(MainActivity3.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             ActivityCompat.requestPermissions(MainActivity3.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+            saveImage = (Button)findViewById(R.id.photo);
             saveImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
