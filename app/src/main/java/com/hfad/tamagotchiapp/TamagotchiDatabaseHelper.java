@@ -36,7 +36,6 @@ class TamagotchiDatabaseHelper extends SQLiteOpenHelper{
             db.execSQL("CREATE TABLE USER (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "NAME TEXT, "
                     + "EMAIL TEXT, "
-                    + "ALERT NUMERIC, "
                     + "PET_SELECTED TEXT,"
                     + "PET_NAME TEXT);");
 

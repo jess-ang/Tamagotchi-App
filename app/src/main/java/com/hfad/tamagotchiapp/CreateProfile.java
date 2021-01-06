@@ -38,7 +38,6 @@ public class CreateProfile extends AppCompatActivity {
         //Obtener el nombre del usuario
         EditText nameView = (EditText) findViewById(R.id.setName);
         EditText emailView = (EditText) findViewById(R.id.setEmail);
-        CheckBox sendAlerts = (CheckBox) findViewById(R.id.sendAlerts);
 
         String name = nameView.getText().toString();
         String email = emailView.getText().toString();
@@ -46,7 +45,6 @@ public class CreateProfile extends AppCompatActivity {
         ContentValues userValues = new ContentValues();
         userValues.put("NAME", name);
         userValues.put("EMAIL", email);
-        userValues.put("ALERT",sendAlerts.isChecked());
         userValues.put("PET_SELECTED", petSelected);
         userValues.put("PET_NAME", petName);
 
@@ -54,7 +52,6 @@ public class CreateProfile extends AppCompatActivity {
 
         try{
             SQLiteDatabase db = tamagotchiDatabaseHelper.getWritableDatabase();
-//            SQLiteDatabase db = tamagotchiDatabaseHelper.getReadableDatabase();
             db.insert("USER",null,userValues);
             db.close();
         } catch(SQLiteException e) {
