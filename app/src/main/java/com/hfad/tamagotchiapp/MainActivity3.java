@@ -45,12 +45,6 @@ public class MainActivity3 extends AppCompatActivity {
                 }
             });
         }
-        public void onClickSave(View view){
-            ImageView imageView = findViewById(R.id.imageView);
-            Bitmap bitmap = getPetPhoto();
-            imageView.setImageBitmap(bitmap);
-            saveBitMap(bitmap);
-        }
 
         private void saveToGallery(){
             ImageView imageView = findViewById(R.id.imageView);

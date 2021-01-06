@@ -119,7 +119,7 @@ public class PetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.v("btn","press");
-//                saveToGallery();
+                saveToGallery();
             }
         });
     }
@@ -136,7 +136,7 @@ public class PetActivity extends AppCompatActivity {
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
         TextView petNameText = (TextView) findViewById(R.id.petNameTitle);
-        petNameText.setText("My pet: "+petName);
+        petNameText.setText(petName);
         ImageView petImage = (ImageView) findViewById(R.id.petImage);
         petImage.setImageResource(petImageId);
 
@@ -202,10 +202,10 @@ public class PetActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void saveToGallery(){
-        ImageView imageView = findViewById(R.id.imageView);
+//        ImageView imageView = findViewById(R.id.imageView);
         Bitmap bitmap = getPetPhoto();
-        imageView.setImageBitmap(bitmap);
-//        saveBitMap(bitmap);
+//        imageView.setImageBitmap(bitmap);
+        saveBitMap(bitmap);
     }
     private void saveBitMap(Bitmap bitmap){
         FileOutputStream outputStream = null;
@@ -243,7 +243,8 @@ public class PetActivity extends AppCompatActivity {
 
     //create bitmap from view and returns it
     private Bitmap getPetPhoto() {
-        LinearLayout savingLayout = (LinearLayout)findViewById(R.id.idForSaving);
+//        LinearLayout savingLayout = (LinearLayout)findViewById(R.id.idForSaving);
+        ImageView savingLayout = (ImageView) findViewById(R.id.petImage);
         Bitmap bitmap = Bitmap.createBitmap(savingLayout.getWidth(), savingLayout.getHeight(),Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         Drawable bgDrawable = savingLayout.getBackground();
