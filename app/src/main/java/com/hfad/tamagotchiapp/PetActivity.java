@@ -10,13 +10,25 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class PetActivity extends AppCompatActivity {
     private SQLiteDatabase db;
@@ -24,6 +36,8 @@ public class PetActivity extends AppCompatActivity {
     private Cursor petCursor;
     private String petName;
     private int petImageId;
+    private ImageView imageView;
+    private Button btnPhoto;
 
     static final String[] mensajes = {"I'm hungry","I'm bored","I got muddy","I feel sick","I'm sleepy"};
     private String estado = "hola";
@@ -81,6 +95,8 @@ public class PetActivity extends AppCompatActivity {
             isRunning = savedInstanceState.getBoolean("isRunning");
         }
         displayMsg();
+        imageView = (ImageView) findViewById(R.id.petImage);
+        btnPhoto = (Button) findViewById(R.id.photo);
     }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -98,6 +114,7 @@ public class PetActivity extends AppCompatActivity {
         petNameText.setText("My pet: "+petName);
         ImageView petImage = (ImageView) findViewById(R.id.petImage);
         petImage.setImageResource(petImageId);
+
 
     }
     @Override
@@ -154,9 +171,65 @@ public class PetActivity extends AppCompatActivity {
             }
         });
     }
-    public void onClickProfileChange(View view){
+    public void onClickProfile(View view){
         Intent intent = new Intent(this,
                 MyProfileActivity.class);
         startActivity(intent);
+    }
+    public void onClickSave(View view){
+        ImageView imageView = findViewById(R.id.imageView);
+        Bitmap bitmap = getPetPhoto();
+        imageView.setImageBitmap(bitmap);
+        saveBitMap(bitmap);
+    }
+    private void saveBitMap(Bitmap bitmap){
+        FileOutputStream outputStream = null;
+        File filepath = Environment.getExternalStorageDirectory();
+        File dir = new File(filepath.getAbsolutePath()+"/Demo/");
+        dir.mkdir();
+        File file = new File(dir,System.currentTimeMillis()+".jpg");
+        try{
+            outputStream = new FileOutputStream(file);
+            Log.v("New file", "ok");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.v("New file", "fail");
+        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        Toast toast = Toast.makeText(this,"Image saved!", Toast.LENGTH_SHORT);
+        toast.show();
+        try{
+            outputStream.flush();
+            Log.v("flush", "ok");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            Log.v("flush", "fail");
+
+        }
+        try{
+            outputStream.close();
+            Log.v("close", "ok");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            Log.v("close", "fail");
+
+        }
+    }
+
+    //create bitmap from view and returns it
+    private Bitmap getPetPhoto() {
+        LinearLayout savingLayout = (LinearLayout)findViewById(R.id.idForSaving);
+        Bitmap bitmap = Bitmap.createBitmap(savingLayout.getWidth(), savingLayout.getHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Drawable bgDrawable = savingLayout.getBackground();
+        if (bgDrawable!=null) {
+            bgDrawable.draw(canvas);
+        }   else{
+            canvas.drawColor(Color.BLUE);
+        }
+        savingLayout.draw(canvas);
+        return bitmap;
     }
 }

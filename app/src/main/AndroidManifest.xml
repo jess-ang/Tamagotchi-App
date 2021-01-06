@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hfad.tamagotchiapp">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyProfileActivity"></activity>
-        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".MainActivity4"></activity>
+        <activity android:name=".MainActivity3">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MyProfileActivity" />
+        <activity android:name=".MainActivity2" />
 
         <service
             android:name=".NeedService"
@@ -18,13 +29,15 @@
             android:exported="false" />
 
         <activity android:name=".PetActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".NeedsActivity"></activity> <!-- <activity android:name=".TimeActivity" /> -->
+        <activity android:name=".NeedsActivity" /> <!-- <activity android:name=".TimeActivity" /> -->
         <!-- <activity android:name=".TestActivity" /> -->
         <activity android:name=".CreateProfile" />
         <activity android:name=".ToysActivity" />

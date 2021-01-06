@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:text="My Profile"
-        android:onClick="onClickProfileChange"/>
+        android:onClick="onClickProfile"/>
 
     </RelativeLayout>
     <ImageView
@@ -50,6 +50,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:context=".PetActivity"
         android:columnCount="3">
 
         <Button
@@ -87,7 +88,9 @@
             android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/photo" />
+            android:text="@string/photo"
+            android:onClick="on"/>
+
 
     </GridLayout>
 </LinearLayout>
